@@ -1,0 +1,6 @@
+To Track Large files, size > 100mb
+
+git lfs track "Project1_Movie_Recommender_System/similarity.pkl"
+git add .gitattributes
+git add -f ./Project1_Movie_Recommender_System/similarity.pkl  # forced because it's in .gitignore
+git commit -m "Add similarity.pkl using Git LFS"
