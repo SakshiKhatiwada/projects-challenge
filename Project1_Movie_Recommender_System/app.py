@@ -10,8 +10,22 @@ TMDB_READ_ACCESS_TOKEN = os.getenv("TMDB_READ_ACCESS_TOKEN")
 BASE_URL = "https://api.themoviedb.org/3/movie"
 IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original' #https://image.tmdb.org/t/p/original/[poster_path]
 
-movies_df = pickle.load(open("Project1_Movie_Recommender_System/movies.pkl", "rb"))
-similarity = pickle.load(open("Project1_Movie_Recommender_System/similarity.pkl", 'rb'))
+# IMP Out of Memory (OOM) issue arised during deployment in *Render*
+# Reason: 512MB of free memory is occupied because these pickle file loaded right at the start up. 
+# Solution: Applied Lazy Loading
+movies_df = None
+similarity = None
+movies_list = []
+
+def get_pickle_files():
+    global movies_df, similarity, movies_list
+    if movies_df is None:
+        movies_df = pickle.load(open("Project1_Movie_Recommender_System/movies.pkl", "rb"))
+    if similarity is None:
+        similarity = pickle.load(open("Project1_Movie_Recommender_System/similarity.pkl", 'rb'))
+    return movies_df, similarity
+
+movies_df, similarity = get_pickle_files()
 movies_list = movies_df['title'].values
 
 def fetch_poster(movie_id):
