@@ -4,10 +4,60 @@
     box-sizing: border-box;
 }
 
+h1{
+    font-size: xx-large;
+}
+
 .bg-dark{
     background-color: #757678;
+    color: #ffffff;
 }
 
 .mt-50{
-    margin: 50;
+    margin: 50px;
+}
+
+main{
+    margin: 10px;
+    /* border: 1px solid black; */
+    padding: 20px;
+    box-sizing: border-box;
+    height: 90vh;
+}
+
+form, .description{
+    box-sizing: border-box;
+    background-color: white;
+    color:black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sub-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid black; */
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.sub-container>select{
+    align-self: center;
+    width: 100%;
+}
+
+select, input, button{
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+button{
+background-color: blue;
+color: white;
+border-color: blueviolet;
+padding: 10px 15px;
 }

@@ -6,21 +6,23 @@
     <title>Car Price Prediction System</title>
 
     <link rel="stylesheet" href="../static/css/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
-<body>
-    <main>
+<body class="p-16 mx-auto bg-dark">
+    <main class="mx-auto flex flex-col items-center text-black-300 bg-white-200">
         <h1>
             Welcome to Car Price Prediction System
         </h1>
 
-        <div>
+        <div class="p-20 description">
             <p>
                 This system predicts the price of the car you want to sell. Fill the details below and get started
             </p>
 
-            <form method="post" action="#" accept-charset="UTF-8">
+            <form method="post" action="#" accept-charset="UTF-8" class="p-10 flex flex-col items-center">
                 
-                <div>
+                <div class="sub-container">
                     <label for="company">Select the company</label>
                     <select name="company" id="company" required="1" onchange="load_car_models(this.id, 'model')"> <!-- car model ko id pathayeko xa -->
                         <option value="" disabled selected>Select Company</option>
@@ -30,7 +32,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="sub-container">
                     <label for="model">Select the  car model</label>
                     <select name="model" id="model" required="1">
                         <option id="default_option_for_model" value="" disabled selected>Select the Company First</option> 
@@ -40,7 +42,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="sub-container">
                     <label for="year">Select the Year of purchase</label>
                     <select name="year" id="year" required="1">
                         <option value="" disabled selected>Select the year of purchase</option>  
@@ -50,7 +52,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="sub-container">
                     <label for="fuel_type">Select the  Fuel Type used</label>
                     <select name="fuel_type" id="fuel_type" required="1">
                         <option value="" disabled selected>Select the Fuel Type</option> 
@@ -60,7 +62,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="sub-container">
                     <label for="kms_driven">Enter the kilometers driven</label>
                     <input type="text" name="kms_driven" id="kms_driven" placeholder="Enter the kilometers driven" required/>
                 </div>
