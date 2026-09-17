@@ -22,7 +22,7 @@
                 
                 <div>
                     <label for="company">Select the company</label>
-                    <select name="company" id="company" required="1">
+                    <select name="company" id="company" required="1" onchange="load_car_models(this.id, 'model')"> <!-- car model ko id pathayeko xa -->
                         <option value="" disabled selected>Select Company</option>
                         {% for company in companies %}
                         <option value={{company}}>{{ company }}</option>    
@@ -33,10 +33,10 @@
                 <div>
                     <label for="model">Select the  car model</label>
                     <select name="model" id="model" required="1">
-                        <option value="" disabled selected>Select the name of the car model</option> 
-                        {% for model in car_models %}
+                        <option id="default_option_for_model" value="" disabled selected>Select the Company First</option> 
+                        <!-- {% for model in car_models %}
                         <option value={{model}}>{{ model }}</option>    
-                        {% endfor %}   
+                        {% endfor %}    -->
                     </select>
                 </div>
 
@@ -73,5 +73,39 @@
         </div>
     </main>
 
+    <script>
+        function load_car_models(id, car_model_id)
+        {
+           var company_element = document.getElementById(id);
+           var car_model = document.getElementById(car_model_id);
+           var defaultOpt = document.getElementById("default_option_for_model")
+           
+           defaultOpt.innerHTML="Select the Model Name";
+           
+           //    console.log(company_element) //returns the entire html element
+           //    console.log(company_element.value); // returns the value
+
+           //    the flow: we first  extracts the companies we have in the df, then we check it against the company we selected in the UI. If both are same company, then we extract all the models from the df. We check for the company name in the models. If we have it, we create a newOption with the model name added.
+           {% for company in companies %} // jinja bata aayeko
+
+           if (company_element.value == "{{ company }}")
+           {
+            {% for model in car_models %} // jinja bata aayeko ho
+                {% if company in model %}
+                    // if the model belongs to the current company, we'll add options
+
+                    var newOption = document.createElement("option");
+                    newOption.value='{{ model }}';
+                    newOption.innerHTML= '{{ model }}';
+                    
+                    car_model.options.add(newOption);
+                    
+                    {% endif %}
+                    {% endfor %}
+                }
+                {% endfor %}
+
+        }
+    </script>
 </body>
 </html>
