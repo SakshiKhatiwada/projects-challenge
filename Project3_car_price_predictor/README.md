@@ -20,4 +20,4 @@ flask app
 ![Project UI Snippet](./Assets/project3-website.png)
 
 After Prediction:
-![Predicted Result](./Assets/project3-website.png)
+![Predicted Result](./Assets/predicted-result.png)
