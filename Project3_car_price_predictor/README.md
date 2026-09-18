@@ -12,3 +12,12 @@ OHE as the encoder, ColumnTransformer and Pipeline
 r2_score as the metrics,
 checks which random state gives highest accuracy, uses numpy to extract it
 extracts the model as a pickle file
+
+## application.py
+flask app
+
+## Project Snippets
+![Project UI Snippet](./Assets/project3-website.png)
+
+After Prediction:
+![Predicted Result](./Assets/project3-website.png)

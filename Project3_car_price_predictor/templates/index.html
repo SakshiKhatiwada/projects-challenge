@@ -20,7 +20,7 @@
                 This system predicts the price of the car you want to sell. Fill the details below and get started
             </p>
 
-            <form method="post" action="#" accept-charset="UTF-8" class="p-10 flex flex-col items-center">
+            <form method="post" action="" accept-charset="UTF-8" class="p-10 flex flex-col items-center">
                 
                 <div class="sub-container">
                     <label for="company">Select the company</label>
@@ -68,10 +68,16 @@
                 </div>
 
                 <div>
-                    <button type="submit" onclick=""> Predict the price </button>
+                    <button type="submit" onclick="send_data()"> Predict the price </button>
                 </div>
  
             </form>
+
+            <div class="sub-container">
+                <div>
+                    <h3 id="prediction"></h3>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -80,14 +86,23 @@
         {
            var company_element = document.getElementById(id);
            var car_model = document.getElementById(car_model_id);
-           var defaultOpt = document.getElementById("default_option_for_model")
-           
-           defaultOpt.innerHTML="Select the Model Name";
-           
+
+           car_model.value = "";
+           car_model.innerHTML= "";
+
+           var defaultOpt = document.createElement("option");
+           defaultOpt.innerHTML= "Select the Model Name";
+           defaultOpt.value="";
+           defaultOpt.disabled = true;
+           defaultOpt.selected = true;
+
+           car_model.appendChild(defaultOpt);
+
            //    console.log(company_element) //returns the entire html element
            //    console.log(company_element.value); // returns the value
 
            //    the flow: we first  extracts the companies we have in the df, then we check it against the company we selected in the UI. If both are same company, then we extract all the models from the df. We check for the company name in the models. If we have it, we create a newOption with the model name added.
+
            {% for company in companies %} // jinja bata aayeko
 
            if (company_element.value == "{{ company }}")
@@ -107,6 +122,31 @@
                 }
                 {% endfor %}
 
+        }
+
+        function form_handler(event){
+            event.preventDefault();
+        }
+
+        function send_data(){
+            // suppress the default path changing behaviour
+            document.querySelector("form").addEventListener("submit", form_handler);
+
+            // send/receive data to/from /predict method
+            var fd = new FormData(document.querySelector('form'));
+            var xhr = new XMLHttpRequest();
+
+            xhr.open(method = 'POST', url='/predict', async = true);
+            document.querySelector("#prediction").innerHTML = "WAIT, predicting price";
+
+            xhr.onreadystatechange = function (){
+                if (xhr.readyState == XMLHttpRequest.DONE){
+                    document.querySelector("#prediction").innerHTML = "Predicted Price: NRs. " + xhr.responseText * 1.6;
+                }
+            }
+
+            xhr.onload = function(){};
+            xhr.send(fd);
         }
     </script>
 </body>
